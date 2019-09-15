@@ -1,0 +1,73 @@
+.\" Hex-Muxer.man
+
+
+.TH man 1 "7. November 2017" "1.0" "Hex-Muxer Man Page"
+
+
+.SH NAME
+Hex-Muxer
+
+.SH SYNOPSIS
+.B Hex-Muxer
+<input> <output> <width> <height> <order=(1-7)> <mode_i=(0-3)> <mode_d=(0|1)> [ (...) ]
+
+.SH DESCRIPTION
+Coding and Muxing of hexagonal Data Streams
+
+
+.SH OPTIONS
+
+.IP "<width> <height>"
+Max. Auflösung aller Videoströme
+
+.IP <order=(1-7)>
+Ordnung Hexarray
+
+.IP <mode_i=(0-3)>
+Transformation: bilineare | bikubische | Lanczos- | B-Spline-Interpolation (B_3)
+
+.IP <mode_d=(0|1)>
+Darstellung: Standard- | Debugging-Modus
+
+.IP <preset=(ultrafast|superfast|veryfast|faster|fast|medium|slow|slower|veryslow|placebo)>
+Voreinstellungen x264, Standard = medium
+
+.IP <qmin=(0-51)>
+Min. Quantisierungsfaktor (beste bis schlechteste Qualität), x264-Standard = 10
+
+.IP <qmax=(0-51)>
+Max. Quantisierungsfaktor, x264-Standard = 51
+
+.IP <trellis=(0-2)>
+Trellis-Quantisierung: deaktiviert | nur für endgültigen Block (x264-Standard) | bei jeder Entscheidung
+
+.IP <mv_range=(-1|>=1)>
+Max. Länge der Bewegungsvektoren, x264-Standard = -1 (auto)
+
+.IP <gop_size=(>=1)>
+GOP-Größe (1 = I-Frames only), x264-Standard = 250
+
+.IP <bframes=(0-16)>
+Max. # konsekutiver B-Frames, x264-Standard = 3
+
+.IP "<lookahead=( 0 - MIN(250,<gop_size>) )>"
+Vorausschauende Kodierung: # Frames, x264-Standard = 40
+
+
+.SH EXAMPLES
+ ./Hex-Muxer Testset/jellyfish-25-mbps-hd-h264.mkv Test_out.mkv 1920 1080 7 0 0
+ ./Hex-Muxer Testset/flower_cif.y4m                Test_out.mkv  352  288 7 0 0
+ ./Hex-Muxer Testset/jellyfish-25-mbps-hd-h264.mkv Test_out.mkv 1920 1080 7 0 0 --qmin 51 --qmax 51
+
+.SH SEE ALSO
+.B CHIP(1), dcrawHMod(1), Hex-Player(1), HMEC(1), Nexys-Video-HDMIHMod(1), x264HMod(1)
+
+.SH BUGS
+-
+
+.SH AUTHOR
+Tobias Schlosser (tobias.schlosser@informatik.tu-chemnitz.de)
+
+.SH COPYING
+Siehe Datei "COPYING"
+
